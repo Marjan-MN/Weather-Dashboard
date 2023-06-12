@@ -1,0 +1,33 @@
+:root {
+    --darkBlue: #004de8;
+    --lightBlue: #349dee;
+    --cardColor: rgb(1, 42, 113);
+    --darkText: #171717;
+    --lightText: rgb(235, 235, 235);
+    
+}
+
+
+header{
+    background-image: linear-gradient(
+        hsl(220, 95%, 33%) 0%,
+        hsl(206, 85%, 57%) 100%
+      );
+    text-align: center;
+    height: 150px;
+    font-size: 40px;
+    color: var(--lightText);
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+
+button{
+    height: 38px;
+    width: 40px;
+}
