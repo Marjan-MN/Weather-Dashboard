@@ -13,7 +13,7 @@ function initPage() {
     var todayweatherEl = $("#today-weather");
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
-    // api.openweathermap.org/data/2.5/weather?q="
+   
     /* Given City by the user */
     /* Daily forecast function */
 
@@ -47,11 +47,13 @@ function initPage() {
                     .then(function (secondResponse) {
                         secondResponse.json().then(function (parsedSecondResponse) {
                         fivedayEl.removeClass("d-none");
+                        
                         console.log("Second response", parsedSecondResponse)
                         //  Parse response to display forecast for next 5 days
                         const forecastEls = $(".forecast");
                         console.log(forecastEls.length)
                         console.log(forecastEls)
+                        forecastEls.text("")
                         for (var i = 0; i < forecastEls.length; i++) {
                             // Creating elements, tablerow, tabledata, and anchor
                             // Setting the text of link and the href of the link
@@ -66,7 +68,7 @@ function initPage() {
                             forecastDateEl.text(forecastMonth + "/" + forecastDay + "/" + forecastYear);
                             console.log(forecastDateEl)
                             forecastEls[i].append(forecastDateEl[0]);
-
+                            
                             // Icon for current weather
                             const forecastWeatherEl = $("<img>");
                             forecastWeatherEl.attr("src", "https://openweathermap.org/img/wn/" + parsedSecondResponse.list[forecastIndex].weather[0].icon + "@2x.png");
@@ -79,11 +81,13 @@ function initPage() {
                             const forecastHumidityEl = $("<p>");
                             forecastHumidityEl.text("Humidity: " + parsedSecondResponse.list[forecastIndex].main.humidity + "%");
                             forecastEls[i].append(forecastHumidityEl[0]);
+
                         }
                     })});
             })})
     }
-    // Get history from local storage if any
+    
+    // set the search city in localStorage
     searchEl.on("click", function () {
         const searchTerm = cityEl.val();
         getWeather(searchTerm);
@@ -95,9 +99,9 @@ function initPage() {
     function k2f(K) {
         return Math.floor((K - 273.15) * 1.8 + 32);
     }
-
+    // Get history from local storage if any
     function renderSearchHistory() {
-        historyEl.text = "";
+        historyEl.text("");
         for (let i = 0; i < searchHistory.length; i++) {
             const historyItem = $("<input>");
             historyItem.attr("type", "text");
@@ -118,15 +122,3 @@ function initPage() {
 
 }
 initPage();
-// searchEl.on('click', function () {
-//     // console.log("save your schedule", event.target)
-//     console.log("search city for forecast", $(this))
-//     // $('col-8 col-md-10 description').siblings(event)
-//     var textDes = $(this).siblings(".card-body").val()
-//     console.log(textDes)
-//     // var cityForecast = $(this).parent().attr("id")
-//     // console.log(cityForecast)
-
-//     localStorage.setItem(searchEl, textDes);
-// });
-// set the search city in localStorage
